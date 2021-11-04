@@ -128,13 +128,14 @@ public class ConvertLeadServiceImpl implements ConvertLeadService {
   private void restore() {
     for (Event key : events.keySet()) {
       switch (key) {
-        case CREATE_ACCOUNT:
-          accountProxy.remove(events.get(key));
+//        case CREATE_ACCOUNT:
+//          accountProxy.remove(events.get(key));
 //        case CREATE_CONTACT -> contactProxy.remove(events.get(key))
 //        case CREATE_OPPORTUNITY -> opportunityProxy.remove(events.get(key));
+        default:
+          throw new RuntimeException("It was not possible to complete the convert request. A service must be down. Trying to rollback:" + events.toString());
       }
     }
-    throw new RuntimeException("It was not possible to complete the convert request. A service must be down. Please try again later.");
   }
 
 }
